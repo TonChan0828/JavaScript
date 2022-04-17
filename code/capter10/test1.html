@@ -1,0 +1,16 @@
+<body style="height:2000px; background-image: linear-grandient(#000,#fff);">
+    <script>
+      const intervalID = setInterval(()=> {
+        console.log(window.scrollY);
+
+        if(window.scrollY >=1000){
+          if(window.confirm("画面を閉じますか？")){
+            window.close();
+          }else{
+            clearInterval(intervalID);
+          }
+        }
+      },1000);
+    </script>
+
+</body>
