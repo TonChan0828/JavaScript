@@ -1,0 +1,16 @@
+<script>
+  async function myFetch(){
+    const response = await fetch("fruit.json");
+    const fruits = await response.json();
+    const responseTag = await fetch("fruit-tag.json");
+    const fruitTag = await responseTag.json();
+
+    for(const {key, value} of fruits){
+      const tags = fruitTag[key];
+      const tagStr = tags.join(",");
+      console.log(`${key}は次の特徴があります。(${tagStr})`);
+    }
+  }
+
+  myFetch();
+</script>
