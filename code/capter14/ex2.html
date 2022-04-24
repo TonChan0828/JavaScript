@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div id="container">
+      <header>
+        <h1 id="main-title"></h1>
+        <p class="sub-title"></p>
+      </header>
+
+      <main id="me" class="body">
+        <p class="child order-1" data-color="blue">1</p>
+        <p class="child order-2" data-color="red">2</p>
+        <p class="child order-3" data-color="orange">3</p>
+      </main>
+      <footer id="footer">
+        <form id="comment">
+          <textarea id="comment-body"></textarea>
+          <input type="submit" value="送信"/>
+        </form>
+      </footer>
+    </div>
+    <script>
+      const me = document.querySelector("#me");
+      console.log(me.children);
+      console.log(me.firstElementChild);
+      console.log(me.lastElementChild);
+      console.log(me.nextElementSibling);
+      console.log(me.previousElementSibling);
+      console.log(me.parentElement);
+      console.log(me.nextElementSibling.children);
+      console.log(me.previousElementSibling.lastElementChild);
+
+    </script>
+  </body>
+</html>

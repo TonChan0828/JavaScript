@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>タイトル</title>
+  </head>
+  <body>
+    <h1>見出し1</h1>
+    <p id="idAttr" class="classAttr">
+      これは段落です.<span>スパンに囲まれています。</span>
+    </p>
+    <p class="classAttr">これは段落です</p>
+    <input type="text" name="nameAttr">
+    <input type="password" name="pwdAttr">
+
+    <script>
+      console.log(document.querySelector("#idAttr"));
+
+      console.log(document.querySelectorAll(".classAttr"));
+
+      console.log(document.querySelectorAll("p"));
+
+      console.log(document.querySelector("input[type='text']"));
+
+      const span = document.querySelector("span");
+      console.log(span.closest("p"));
+
+      console.log(document.querySelectorAll("#idAttr > *"));
+
+      console.log(document.querySelector("input[type='text']").nextElementSibling);
+    </script>
+  </body>
+</html>

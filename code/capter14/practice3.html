@@ -1,0 +1,54 @@
+<div id="source">
+  Source
+</div>
+<section id="section">
+  <div class="wrap">
+    <h1 class="title">
+      <span>タイトル</span>
+    </h1>
+    <ul class="list">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+  </div>
+</section>
+
+<script>
+function moveElement(callback){
+  return () => new Promise(resolve =>{
+    setTimeout(()=>{
+      callback();
+      resolve();
+    },2000);
+  });
+}
+
+  const source = document.querySelector("#source");
+
+  const answer1 = moveElement(()=>{
+    const h1 = document.querySelector(".title");
+    h1.prepend(source);
+  });
+
+  const answer2 = moveElement(()=>{
+    const h1 = document.querySelector(".title");
+    h1.after(source);
+  })
+
+  const answer3 = moveElement(()=>{
+    const wrap = document.querySelector(".wrap");
+    wrap.append(source);
+  })
+
+  const answer4 = moveElement(()=>{
+    const list = document.querySelector(".list");
+    const targetLi = listChildren[1];
+    targetLi.prepend(source);
+  })
+
+  answer1()
+  .then(answer2)
+  .then(answer3)
+  .then(answer4);
+</script>

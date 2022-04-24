@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Todoアプリ</title>
+    <style>
+      .completed > span {
+        /* ③用のスタイル */
+        text-decoration: line-through;
+        background-color: gray;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="todo-container">
+      <input type="text" name="" id="create-input" />
+      <button id="create-btn">追加</button>
+      <ul id="todo-list">
+        <!-- ここに.todo-itemを追加 -->
+      </ul>
+    </div>
+    <template id="todo-item-tmpl">
+      <li class="todo-item">
+        <!-- #todo-listに追加する元となるテンプレート -->
+        <span class="todo-title"></span>
+        <input type="button" class="delete-btn" value="削除">
+        <input type="button" class="complete-btn" value="完了">
+      </li>
+    </template>
+
+    <script>
+      const todoList = document.querySelector("#todo-list");
+
+      const todoItemTmpl = document.querySelector("#todo-item-tmpl");
+      const todoItem = todoItemTmpl.content;
+
+      function createTodoItem(value){
+        const newItem = todoItem.cloneNode(true);
+        const newTitle = newItem.querySelector(".todo-title");
+        newTitle.textContent = value;
+        todoList.append(newItem);
+      }
+      createTodoItem("1つ目");
+      createTodoItem("2つ目");
+      createTodoItem("3つ目");
+
+      function deleteTodoItem(item){
+        item.remove();
+      }
+
+      setTimeout(()=>{
+        deleteTodoItem(todoList.firstElementChild);
+      },1000);
+
+      function completeTodoItem(item){
+        item.classList.toggle("completed");
+      }
+
+      setTimeout(()=>{
+        completeTodoItem(todoList.lastElementChild);
+      },2000);
+    </script>
+  </body>
+</html>

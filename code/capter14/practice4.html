@@ -1,0 +1,13 @@
+<a href="https://google.com">Google</a>
+<a href="https://bing.com">Bing</a>
+<a href="https://duckduckgo.com">DuckDuckGo</a>
+<script>
+  const links = document.querySelectorAll("a");
+
+  for(const link of links){
+    const url = link.getAttribute("href");
+    if(/google\.com/.test(url)){
+      link.setAttribute("href", "https://yahoo.co.jp/");
+    }
+  }
+</script>

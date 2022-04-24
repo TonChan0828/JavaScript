@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div id="container">
+      <header>
+        <h1 id="main-title"></h1>
+        <p class="sub-title"></p>
+      </header>
+
+      <main id="me" class="body">
+        <p class="child order-1" data-color="blue">1</p>
+        <p class="child order-2" data-color="red">2</p>
+        <p class="child order-3" data-color="orange">3</p>
+      </main>
+      <footer id="footer">
+        <form id="comment">
+          <textarea id="comment-body"></textarea>
+          <input type="submit" value="送信"/>
+        </form>
+      </footer>
+    </div>
+    <script>
+      const mainTitle = document.querySelector("#main-title");
+      mainTitle.textContent = "タイトル";
+
+      const subTitle = document.querySelector(".sub-title");
+      subTitle.innerHTML = "<b>サブタイトル</b>";
+
+      const me = document.querySelector("#me");
+      const child1 = me.children[0];
+      me.append(child1);
+
+      const child2 = me.children[0].cloneNode(true);
+      me.prepend(child2);
+
+      for(const child of me.children){
+        child.style.color = child.dataset.color;
+      }
+
+      const commentBody = document.querySelector("#comment-body");
+      commentBody.textContent =
+      `#meのborderの上端とHTMLの上端の感覚は${me.offsetTop}pxです\n`+
+      `#meのborderの左端とHTMLの左端の感覚は${me.offsetLeft}pxです\n`+
+      `ビューポートの上端から#meの枠線の上端までの間隔は${me.getBoundingClientRect().y}pxです\n`+
+      `ビューポートの左端から#meの枠線の左端までの間隔は${me.getBoundingClientRect().x}pxです\n`+
+      `#meのborderを含めた高さは${me.offsetHeight}pxです\n`+
+      `#meのborderを含めた横幅は${me.offsetWidth}pxです\n`;
+
+    </script>
+  </body>
+</html>
