@@ -1,0 +1,34 @@
+<body>
+  <div id="container">
+    <span>#container</span>
+    <div id="wrapper">
+      <span>#wrapper</span>
+      <div id="target"><span>#target</span></div>
+    </div>
+  </div>
+  <script>
+    const container = document.querySelector("#container");
+    const wrapper = document.querySelector("#wrapper");
+    const target = document.querySelector("#target");
+
+    function ClickAlert(element, isCapture=false){
+      element.addEventListener("click", ()=>{
+        const spanText = element.firstElementChild.textContent;
+        alert(`${spanText}のクリックイベントが発火しました。`);
+      },isCapture);
+    }
+
+    ClickAlert(container);
+    ClickAlert(wrapper);
+    ClickAlert(target);
+  </script>
+  <style>
+    div{
+      margin: 10px;
+      border: 1px solid black;
+    }
+    body{
+      background: cornsilk;
+    }
+  </style>
+</body>
