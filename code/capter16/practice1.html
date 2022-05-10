@@ -1,0 +1,16 @@
+<script type="module">
+  import defaultFn, {obj,fn,StdClass} from "./practice1.js";
+  defaultFn();
+  obj.console();
+  fn();
+  StdClass.console();
+
+  async function init(){
+    const{default:defaultFn,obj,fn,StdClass} = await import("./practice1.js");
+    defaultFn();
+    obj.console();
+    fn();
+    StdClass.console();
+  }
+  init();
+</script>
