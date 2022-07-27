@@ -20,35 +20,30 @@
     let dom = document.querySelector('#root');
 
     let title = "React page.";
-    let message = "メッセージを表示します。";
+    let message = "お名前をどうぞ";
+    let in_val ='';
 
-    let data = {
-      url:'http://google.com',
-      title:'Google',
-      caption:'※これは、Googleの検索サイトです'
+    let doChange = (event)=>{
+      in_val = event.target.value;
+      message = 'こんにちは、'+ in_val + 'さん！';
     };
 
+    let doAction = (event)=>{
     let el = (
       <div>
         <h4>{title}</h4>
         <h6>{message}</h6>
-        {(()=>
-          <div className="card mt-4">
-            <div className="card-header">
-              {data.title}
-            </div>
-            <div className="card-body">
-              {data.caption}
-            </div>
-            <div className="card-footer">
-              <a href={data.url}>※{data.title}に移動</a>
-            </div>
+        <div className="alert alert-primary">
+          <div className="form-group"></div>
+          <label>Input:</label>
+          <input type="text" className="form-control" id="input" onChange={doChange} />
           </div>
-          )()}
+          <button onClick={doAction} className="btn btn-primary">Click</button>
       </div>
     );
-
     ReactDOM.render(el,dom);
+    };
+    doAction();
   </script>
 </body>
 </html>
