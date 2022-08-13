@@ -1,48 +1,77 @@
 import React, { useState,useEffect } from 'react';
 import './App.css';
 
-function AlertMessage(props) {
-  return <div className='alert alert-primary h5 text-primary'>
-    <h5>{props.msg}</h5>
-  </div>
+const total = (a) => {
+  let re = 0;
+  for (let i = 0; i <= a; i++){
+    re += i;
   }
+  return re;
+}
 
-function App() {
-  const [val, setVal] = useState(1000);
-  const [tax1, setTax1] = useState(0);
-  const [tax2, setTax2] = useState(0);
-  const [msg, setMsg] = useState('<p>set a price...</p>');
+const tax = (a) => {
+  return Math.floor(a * 1.1);
+};
 
-  const doChange = (event) => {
-    setVal(event.target.value);
+function useCalc(num = 0, func = (a) => { return a; }) {
+  const [msg, setMsg] = useState(null);
+
+  const setValue = (p) => {
+    let res = func(p);
+    setMsg(<p className='h5'>※{p}の結果は、{res}です。</p>);
   };
 
-  useEffect(() => {
-    let res = <div>
-      <p>軽減税率(8％) : {tax1}円</p>
-      <p>通常税率(10％) : {tax2}円</p>
-    </div>
-    setMsg(res);
-  },[tax1,tax2])
+  return [msg, setValue];
+}
 
-  useEffect(() => {
-    setTax1(Math.floor(val * 1.08));
-  });
+function PlainMessage(props) {
+  const [msg, setCalc] = useCalc();
 
-  useEffect(() => {
-    setTax2(Math.floor(val * 1.1));
-  });
+  const onChange = (e) => {
+    setCalc(e.target.value);
+  };
 
+  return <div className='p-3 h5'>
+    <h5>{msg}</h5>
+    <input type='number' onChange={onChange} className='form-control'/>
+  </div>
+}
+
+function AlertMessage(props) {
+  const [msg, setCalc] = useCalc(0, total);
+
+  const onChange = (e) => {
+    setCalc(e.target.value);
+  };
+
+  return <div className='alert alert-primary h5 text-primary'>
+    <h5>{msg}</h5>
+    <input type='number' onChange={onChange} min="0" max="10000" className='form-control'/>
+  </div>
+}
+
+function CardMessage(props) {
+  const [msg, setCalc] = useCalc(0, tax);
+
+  const onChange = (e) => {
+    setCalc(e.target.value);
+  };
+
+  return <div className='card p-3 h5 border-primary'>
+    <h5>{msg}</h5>
+    <input type='range' onChange={onChange} min='0' max='10000' step='100' className='form-control'/>
+  </div>
+}
+
+function App() {
   return (
     <div>
       <h1 className='bg-primary text-white display-4'>React</h1>
       <div className='container'>
         <h4 className='my-3'>Hooks sample</h4>
-        <AlertMessage msg={msg} />
-        <div className='form-group'>
-          <label>Input:</label>
-          <input type="number" className='form-control' onChange={doChange}/>
-        </div>
+        <PlainMessage/>
+        <AlertMessage />
+        <CardMessage/>
       </div>
     </div>
   )
