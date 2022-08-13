@@ -1,40 +1,69 @@
 import React, { useState } from 'react';
 import './App.css';
 
+function AlertMessage(props) {
+  const data = props.data;
+  const msg = JSON.stringify(data);
+
+  return <div className='alert alert-primary h5 text-primary'>
+    <h5>{msg}</h5>
+    <hr />
+    <table className='table h6'>
+      <tbody>
+        <tr><th>Name</th><td>{data.name}</td></tr>
+        <tr><th>Mail</th><td>{data.mail}</td></tr>
+        <tr><th>Age</th><td>{data.age}</td></tr>
+      </tbody>
+    </table>
+  </div>
+  }
+
 function App() {
-  const [count, setCount] = useState(0);
-  const [flag, setFlag] = useState(false);
-  const clickFunc = () => {
-    setCount(count + 1);
+  const [name, setName] = useState("");
+  const [mail, setMail] = useState("");
+  const [age, setAge] = useState("");
+  const [form, setForm] = useState({
+    name:"no name", mail:'no mail',age:0,
+  });
+
+  const doChangeName = (event) => {
+    setName(event.target.value);
   };
-  const changeFlag = (e) => {
-    setFlag(e.target.checked);
+
+  const doChangeMail = (event) => {
+    setMail(event.target.value);
+  };
+
+  const doChangeAge = (event) => {
+    setAge(event.target.value);
+  };
+
+  const doSubmit = (event) => {
+    setForm({ name: name, mail: mail, age: age });
+    event.preventDefault();
   };
 
   return (
     <div>
       <h1 className='bg-primary text-white display-4'>React</h1>
-    <div className='container'>
+      <div className='container'>
         <h4 className='my-3'>Hooks sample</h4>
-        {flag ?
-        <div className='alert alert-primary text-center'>
-          <p className='h5 mb-3'>click: {count} times.</p>
-          <div>
-            <button className='btn btn-primary' onClick={clickFunc}>Click me!</button>
+        <AlertMessage data={form} setData={setForm} />
+        <form onSubmit={doSubmit}>
+          <div className='form-group'>
+            <label>Name:</label>
+            <input type="text" className="form-control" onChange={doChangeName}/>
           </div>
-        </div>
-          :
-         <div className='card p-3 border-primary text-center'>
-          <p className='h5 mb-3 text-left text-primary'>click: {count} times.</p>
-          <div>
-            <button className='btn btn-primary' onClick={clickFunc}>Click me!</button>
+          <div className='form-group'>
+            <label>Mail:</label>
+            <input type="text" className="form-control" onChange={doChangeMail}/>
           </div>
-        </div>
-        }
-        <div className='form-group h6 text-center pt-3'>
-          <input type="checkbox" className="form-check-input" id="check1" onChange={changeFlag} />
-          <label className="form-check-label" htmlFor="check1">Change form style.</label>
-        </div>
+          <div className='form-group'>
+            <label>Age:</label>
+            <input type="text" className="form-control" onChange={doChangeAge}/>
+          </div>
+          <input type="submit" className="btn btn-primary" value="Click"/>
+        </form>
       </div>
     </div>
   )
